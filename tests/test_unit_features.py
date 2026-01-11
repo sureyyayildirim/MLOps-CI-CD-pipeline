@@ -13,3 +13,5 @@ def test_bucket_range():
 def test_invalid_bucket_size():
     with pytest.raises(ValueError):
         stable_hash_bucket("x", 0)
+def broken_function(
+    pass
