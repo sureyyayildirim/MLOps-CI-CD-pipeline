@@ -27,10 +27,10 @@ The following diagram illustrates the main components of the system and how they
 
 ```mermaid
 flowchart LR
-    A[Git Repository<br/>(Source Code & Tests)]
-    B[CI Pipeline<br/>(GitHub Actions)]
-    C[Docker Image<br/>(Build Artifact)]
-    D[Prediction Service<br/>(FastAPI Container)]
+    A["Git Repository\nSource Code and Tests"]
+    B["CI Pipeline\nGitHub Actions"]
+    C["Docker Image\nBuild Artifact"]
+    D["Prediction Service\nFastAPI Container"]
 
     A -->|git push / PR| B
     B -->|docker build| C
@@ -50,6 +50,7 @@ Component Descriptions
 ## B. Sequence Diagram — Workflow Execution & Stop-the-Line Logic
 This diagram shows the time-ordered execution flow of the CI/CD pipeline, highlighting the stop-the-line mechanism.
 
+```mermaid
 sequenceDiagram
     participant Dev as Developer
     participant CI as CI Pipeline
@@ -61,10 +62,10 @@ sequenceDiagram
 
     alt Tests or Lint Fail
         CI-->>Dev: Pipeline Failed (Stop the Line)
-    else Tests & Lint Pass
+    else Tests and Lint Pass
         CI->>CI: Build Docker Image
         CI->>Env: Run Container
-        CI->>Env: Smoke Test (/health, /predict)
+        CI->>Env: Smoke Test
 
         alt Smoke Test Fail
             CI-->>Dev: Pipeline Failed (Stop the Line)
@@ -73,6 +74,7 @@ sequenceDiagram
         end
     end
 
+```
 ## Why This Matters
 
 This sequence explicitly demonstrates that:
